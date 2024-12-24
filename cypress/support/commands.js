@@ -34,3 +34,11 @@ Cypress.Commands.add('createToken', (credentials) => {
         cy.wrap(token).as('authToken');
     });
 });
+
+Cypress.Commands.add('createBooking', (dadosReserva) => {
+    cy.api({
+        method: 'POST',
+        url: `${Cypress.config('baseUrl')}/booking`,
+        body: dadosReserva
+    })
+})

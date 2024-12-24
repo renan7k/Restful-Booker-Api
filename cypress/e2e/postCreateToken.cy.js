@@ -67,7 +67,7 @@ describe('Funcionalidade de criar token de acesso - API', () => {
     })
   })
 
-  it.only('Verificar mensagem de retorno ao tentar criar token sem preenchimento do password', () => {
+  it('Verificar mensagem de retorno ao tentar criar token sem preenchimento do password', () => {
     const credentials = {
       "username" : "admin",
       "password" : ""
