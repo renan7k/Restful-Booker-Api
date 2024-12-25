@@ -39,6 +39,7 @@ Cypress.Commands.add('createBooking', (dadosReserva) => {
     cy.api({
         method: 'POST',
         url: `${Cypress.config('baseUrl')}/booking`,
-        body: dadosReserva
+        body: dadosReserva,
+        failOnStatusCode: false  //Não falha automaticamente se o status for 500
     })
 })
