@@ -43,3 +43,10 @@ Cypress.Commands.add('createBooking', (dadosReserva) => {
         failOnStatusCode: false  //Não falha automaticamente se o status for 500
     })
 })
+
+Cypress.Commands.add('getBookingId', () => {
+    cy.api({
+        method: 'GET',
+        url: `${Cypress.config('baseUrl')}/booking`
+    })
+})
