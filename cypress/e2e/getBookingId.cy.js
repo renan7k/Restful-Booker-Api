@@ -23,7 +23,7 @@ describe('Funcionalidade de consultar o ID', () => {
 
     context('Busca do ID pelo firstName', () => {
         var reserva = {
-            "firstname": "Timoteo",
+            "firstname": faker.name.firstName(),
             "lastname": "Andrade",
             "totalprice": 3500,
             "depositpaid": true,
@@ -119,16 +119,70 @@ describe('Funcionalidade de consultar o ID', () => {
             },
             "additionalneeds": "Late checkout"
         }
-        it.only('Verificar resposta com ID cadastrado ao consultar com o filtro da data de checkin', () => {
+        it('Verificar resposta com ID cadastrado ao consultar com o filtro da data de checkin', () => {
+            cy.createBooking(reserva).then((response) => {
+                const bookingId = response.body.bookingid
+                    cy.api({
+                        method: 'GET',
+                        url : `${Cypress.config('baseUrl')}/booking?checkin=${reserva.bookingdates.checkin}`
+                    }).then((response) => {
+                        expect(response.status).to.eq(200)
+                        const ids = response.body.map(item => item.bookingid)//Extraindo todos os ID's da resposta
+                        expect(ids).to.include(bookingId) //Verifica se o bookingid salvo está no array de id's retornados
+                    })
+            })
+        })
 
+        it('Verificar response vazio ao consultar ID com uma data de checkin não cadastrada', () => {
+            const checkin = '2027-08-11'
+            
+            cy.api({
+                method : 'GET',
+                url : `${Cypress.config('baseUrl')}/booking?checkin=${checkin}`
+            }).then((response) => {
+                expect(response.status).to.eq(200)
+                expect(response.body).have.length(0)
+            })
         })
 
     })
 
     context('Busca do ID pela data de checkout', () => {
-        it('Verifi', () => {
+        var reserva = {
+            "firstname": faker.name.firstName(),
+            "lastname": faker.name.lastName(),
+            "totalprice": 3500,
+            "depositpaid": true,
+            "bookingdates": {
+                "checkin": faker.date.soon(0),  // Gera uma data no futuro (geralmente próxima ao momento atual)
+                "checkout": faker.date.soon(5)  // Gera uma data no futuro, pelo menos 5 dias depois
+            },
+            "additionalneeds": "Late checkout"
+        }
+        it('Verificar resposta com ID cadastrado ao consultar com o filtro da data de checkout', () => {
+            cy.createBooking(reserva).then((response) => {
+                const bookingId = response.body.bookingid
 
+                cy.api({
+                    method: 'GET',
+                    url : `${Cypress.config('baseUrl')}/booking?checkin=${reserva.bookingdates.checkout}`
+                }).then((response) => {
+                    expect(response.status).to.eq(200)
+                    const ids = response.body.map(item => item.bookingid)//Extraindo todos os ID's da resposta
+                    expect(ids).to.include(bookingId) //Verifica se o bookingid salvo está no array de id's retornados
+                })
+            })
         })
+        it('Verificar response vazio ao consultar ID com uma data de checkout não cadastrada', () => {
+            const checkout = '2028-08-11'
 
+            cy.api({
+                method: 'GET',
+                url: `${Cypress.config('baseUrl')}/booking?checkin=${checkout}`
+            }).then((response) => {
+                expect(response.status).to.eq(200)
+                expect(response.body).have.length(0)
+            })
+        })
     })
 })
