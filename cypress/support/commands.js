@@ -44,11 +44,18 @@ Cypress.Commands.add('createBooking', (dadosReserva) => {
     })
 })
 
-//Criar lógica para incluir parâmetro enviado
 Cypress.Commands.add('getBookingId', (parametro, dado) => {
     cy.api({
         method: 'GET',
         url: `${Cypress.config('baseUrl')}/booking?${parametro}=${dado}`
              //`${Cypress.config('baseUrl')}/booking?checkin=${checkin}`
+    })
+})
+
+Cypress.Commands.add('getBookingById', (bookingId) => {
+    cy.api({
+        method: 'GET',
+        url: `${Cypress.config('baseUrl')}/booking/${bookingId}`,
+        failOnStatusCode: false 
     })
 })

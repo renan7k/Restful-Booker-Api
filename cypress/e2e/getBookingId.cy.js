@@ -123,7 +123,7 @@ describe('Funcionalidade de consultar o ID', () => {
         })
 
         it.skip('Verificar response vazio ao consultar ID com uma data de checkin não cadastrada', () => {
-            //Existe bug na api. 
+            //Existe bug na api.| Filtro não funciona, e retorna diversas reservas
             const data = '2012-08-11'
             
             cy.getBookingId(parametro, data).then((response) => {
@@ -160,7 +160,7 @@ describe('Funcionalidade de consultar o ID', () => {
             })
         })
         it.skip('Verificar response vazio ao consultar ID com uma data de checkout não cadastrada', () => {
-            //Existe bug na api. 
+            //Existe bug na api. | Filtro não funciona, e retorna diversas reservas
             const data = '2015-08-11'
             
             // cy.api({
