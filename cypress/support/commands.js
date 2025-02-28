@@ -59,3 +59,14 @@ Cypress.Commands.add('getBookingById', (bookingId) => {
         failOnStatusCode: false 
     })
 })
+
+Cypress.Commands.add('deleteBooking', (bookingId, Authorization) => {
+    cy.api({
+        method: 'DELETE',
+        url: `${Cypress.config('baseUrl')}/booking/${bookingId}`,
+        headers: {
+            Authorization: Authorization
+        },
+        failOnStatusCode: false 
+    })
+})
