@@ -70,3 +70,15 @@ Cypress.Commands.add('deleteBooking', (bookingId, Authorization) => {
         failOnStatusCode: false 
     })
 })
+
+Cypress.Commands.add('updateBooking', (bookingId, Authorization, reservaUpdate) => {
+    cy.api({
+        method: 'PUT',
+        url: `${Cypress.config('baseUrl')}/booking/${bookingId}`,
+        headers: {
+            Authorization: Authorization
+        },
+        body: reservaUpdate,
+        failOnStatusCode: false 
+    })
+})
