@@ -54,15 +54,11 @@ describe('Testes referente a funcionalidade de alteração de reservas via API',
                 expect(response.body.bookingdates.checkout).to.equal(reservaUpdate.bookingdates.checkout)
                 expect(response.body.additionalneeds).to.equal(reservaUpdate.additionalneeds)
             })
-
         })
-
-
-
     })
 
     //Mesmo cenário de cima, alterando a forma de autenticação
-    it.only('Verificar alteração de reserva com sucesso usando autenticação com token', () => {
+    it('Verificar alteração de reserva com sucesso usando autenticação com token', () => {
         const credentials = {
             "username": "admin",
             "password": "password123"
@@ -109,11 +105,36 @@ describe('Testes referente a funcionalidade de alteração de reservas via API',
     })
 
     it('Verificar erro 403 ao tentar alterar reserva com authorization inválido', () => {
-        
+        const Authorization = Cypress.env('invalidAuthorization')
+
+        cy.createBooking(reserva).then((response) => {
+            const bookingId = response.body.bookingid
+
+            cy.updateBooking(bookingId, Authorization, reserva).then((response) => {
+                expect(response.status).to.eq(403)
+                expect(response.body).to.contain('Forbidden')
+            })
+        })
     })
 
     it('Verificar erro 403 ao tentar alterar reserva com token inválido', () => {
+        const token = '12345'
+        
+        cy.createBooking(reserva).then((response) => {
+            const bookingId = response.body.bookingid;
 
+            cy.api({
+                method: 'PUT',
+                url: `${Cypress.config('baseUrl')}/booking/${bookingId}`, //Usando o id salvo
+                headers: {
+                    Cookie: `token=${token}` //Usando o token salvo
+                },
+                body: reserva,
+                failOnStatusCode: false 
+            }).then((response) => {
+                expect(response.status).to.eq(403)
+                expect(response.body).to.contain('Forbidden')
+            })
+        })
     })
-
 })
