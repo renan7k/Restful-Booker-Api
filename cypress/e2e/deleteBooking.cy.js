@@ -36,12 +36,8 @@ describe('Testes referente a funcionalidade de exclusão de reservas via API', (
     it('Verificar exclusão de reserva com sucesso usando autenticação com token', () => {
 
         //finalizar teste , e descrever etapas , (uso do alias, etc)
-        const credentials = {
-            "username" : "admin",
-            "password" : "password123"
-          }
-      
-        cy.createToken(credentials);
+
+        cy.createToken(Cypress.env('credentials'));
         
         //Aqui estamos usando o alias definido no comando customizado de criação do token;
         //Foi a maneira mais rápida de reaproveitar o token 

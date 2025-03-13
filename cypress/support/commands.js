@@ -82,3 +82,15 @@ Cypress.Commands.add('updateBooking', (bookingId, Authorization, reservaUpdate) 
         failOnStatusCode: false 
     })
 })
+
+Cypress.Commands.add('updatePartialBooking', (bookingId, Authorization, reservaUpdate) => {
+    cy.api({
+        method : 'PATCH',
+        url : `${Cypress.config('baseUrl')}/booking/${bookingId}`,
+        headers : {
+            Authorization: Authorization
+        },
+        body: reservaUpdate,
+        failOnStatusCode: false
+    })
+})
