@@ -14,7 +14,7 @@ describe('Testes referente a funcionalidade de alteração de reservas via API',
         "additionalneeds": faker.word.words()
     }
     it('Verificar alteração de reserva com sucesso usando autenticação com Authorization', () => {
-        const Authorization = Cypress.env('Authorization');
+        const Authorization = Cypress.env('AUTHORIZATION_TOKEN');
 
         var reservaUpdate = {
             "firstname": 'Joelison',

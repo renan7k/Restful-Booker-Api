@@ -10,5 +10,6 @@ jobs:
         uses: cypress-io/github-action@v6
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          CYPRESS_AUTHORIZATION_TOKEN: ${{ secrets.AUTHORIZATION_TOKEN }}
         with:
           command: npm run test:cloud

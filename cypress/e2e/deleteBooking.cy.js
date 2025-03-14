@@ -17,7 +17,7 @@ describe('Testes referente a funcionalidade de exclusão de reservas via API', (
     it('Verificar exclusão de reserva com sucesso usando autenticação com Authorization', () => {
         //criação da reserva
         //exclusão da reserva
-        const Authorization = Cypress.env('Authorization');
+        const Authorization = Cypress.env('AUTHORIZATION_TOKEN');
         cy.createBooking(reserva).then((response) => {
             const bookingId = response.body.bookingid;
 
@@ -34,10 +34,13 @@ describe('Testes referente a funcionalidade de exclusão de reservas via API', (
     })
 
     it('Verificar exclusão de reserva com sucesso usando autenticação com token', () => {
-
+        const credentials = {
+            "username": "admin",
+            "password": "password123"
+        }
         //finalizar teste , e descrever etapas , (uso do alias, etc)
 
-        cy.createToken(Cypress.env('credentials'));
+        cy.createToken(credentials);
         
         //Aqui estamos usando o alias definido no comando customizado de criação do token;
         //Foi a maneira mais rápida de reaproveitar o token 
