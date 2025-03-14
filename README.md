@@ -2,6 +2,7 @@
 comando customizado
 plugin cypress api
 variáveis de ambiente
+variáveis sensíveis configuradas no github actions (secrets)
 faker.js 
 
 testes independentes, como por exemplo, implementação de pré-condição

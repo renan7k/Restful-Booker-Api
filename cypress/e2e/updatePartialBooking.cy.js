@@ -15,7 +15,7 @@ describe('Testes referente a funcionalidade de alteração PARCIAL de reservas v
     }
 
     it('Verificar alteração parcial de reserva com sucesso usando autenticação com Authorization', () => {
-        const Authorization = Cypress.env('Authorization')
+        const Authorization = Cypress.env('AUTHORIZATION_TOKEN')
 
         var reservaUpdate = {
             "firstname": 'Raimundo',
@@ -47,8 +47,9 @@ describe('Testes referente a funcionalidade de alteração PARCIAL de reservas v
             },
             "additionalneeds": 'Parking and breakfast'
         }
-
-        cy.createToken(Cypress.env('credentials'));
+        const credentials = JSON.parse(Cypress.env('CREDENTIALS')); 
+        
+        cy.createToken(credentials);
 
         cy.get('@authToken').then((token) => {
             cy.createBooking(reserva).then((response) => {

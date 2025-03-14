@@ -59,10 +59,8 @@ describe('Testes referente a funcionalidade de alteração de reservas via API',
 
     //Mesmo cenário de cima, alterando a forma de autenticação
     it('Verificar alteração de reserva com sucesso usando autenticação com token', () => {
-        const credentials = {
-            "username": "admin",
-            "password": "password123"
-        }
+        const credentials = JSON.parse(Cypress.env('CREDENTIALS')); 
+        
         var reservaUpdate = {
             "firstname": 'Marta',
             "lastname": 'Guimaraes',
