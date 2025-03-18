@@ -35,7 +35,7 @@ describe('Testes referente a funcionalidade de exclusão de reservas via API', (
 
     it('Verificar exclusão de reserva com sucesso usando autenticação com token', () => {
         console.log("Valor de CREDENTIALS:", Cypress.env('CREDENTIALS'));
-        const credentials = JSON.parse(Cypress.env('CREDENTIALS')); 
+        const credentials = Cypress.env('CREDENTIALS'); 
         
         //finalizar teste , e descrever etapas , (uso do alias, etc)
 
