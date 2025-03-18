@@ -7,13 +7,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Debug - Verificar CREDENTIALS
-        run: | 
-          echo "Valor de CREDENTIALS: $CREDENTIALS"
-        env:
-          CREDENTIALS: ${{ secrets.CREDENTIALS }}
+      # - name: Debug - Verificar CREDENTIALS
+      #   run: | 
+      #     echo "Valor de CREDENTIALS: $CREDENTIALS"
+      #   env:
+      #     CREDENTIALS: ${{ secrets.CREDENTIALS }}
 
-      - name: Criar arquivo cypress.env.json com as credenciais
+      #Arquivo cypress.env tem de ser criado antes do step run
+      #Optamos por esta estratégia, por erro na conversão
+      - name: Criar arquivo cypress.env.json com as credenciais 
         run: |
           echo "{\"CREDENTIALS\": $CREDENTIALS}" > cypress.env.json
           cat cypress.env.json  # Exibir o conteúdo para debug
