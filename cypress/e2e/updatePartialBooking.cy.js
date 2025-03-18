@@ -47,6 +47,7 @@ describe('Testes referente a funcionalidade de alteração PARCIAL de reservas v
             },
             "additionalneeds": 'Parking and breakfast'
         }
+        console.log("Valor de CREDENTIALS:", Cypress.env('CREDENTIALS'));
         const credentials = JSON.parse(Cypress.env('CREDENTIALS')); 
         
         cy.createToken(credentials);
