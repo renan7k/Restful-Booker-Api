@@ -80,7 +80,7 @@ describe('Testes referente a funcionalidade de exclusão de reservas via API', (
 
     })
 
-    it.only('Verificar que api apresenta erro ao tentar deletar uma reserva com id inválido', () => {
+    it('Verificar que api apresenta erro ao tentar deletar uma reserva com id inválido', () => {
         //Bug de melhoria, Api deveria retornar talvez um 404 - not found
         const Authorization = Cypress.env('AUTHORIZATION_TOKEN');
         const bookingId = 7832154;

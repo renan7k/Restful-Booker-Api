@@ -13,4 +13,4 @@ jobs:
           CYPRESS_AUTHORIZATION_TOKEN: ${{ secrets.AUTHORIZATION_TOKEN }}
           CREDENTIALS: ${{ secrets.CREDENTIALS }}
         with:
-          command: npm run test:cloud
+          command: npm run test:cloud --quiet false
