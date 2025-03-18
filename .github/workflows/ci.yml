@@ -6,11 +6,26 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Debug - Verificar CREDENTIALS
+        run: | 
+          echo "Valor de CREDENTIALS: $CREDENTIALS"
+        env:
+          CREDENTIALS: ${{ secrets.CREDENTIALS }}
+
+      - name: Criar arquivo cypress.env.json com as credenciais
+        run: |
+          echo "{\"CREDENTIALS\": $CREDENTIALS}" > cypress.env.json
+          cat cypress.env.json  # Exibir o conteúdo para debug
+        env:
+          CREDENTIALS: ${{ secrets.CREDENTIALS }}
+
       - name: Cypress run
         uses: cypress-io/github-action@v6
+
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           CYPRESS_AUTHORIZATION_TOKEN: ${{ secrets.AUTHORIZATION_TOKEN }}
-          echo "{\"CREDENTIALS\": $CREDENTIALS}" > cypress.env.json
+          CYPRESS_CREDENTIALS: ${{ secrets.CREDENTIALS }}
         with:
           command: npm run test:cloud
