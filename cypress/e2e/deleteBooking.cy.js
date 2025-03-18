@@ -34,6 +34,7 @@ describe('Testes referente a funcionalidade de exclusão de reservas via API', (
     })
 
     it('Verificar exclusão de reserva com sucesso usando autenticação com token', () => {
+        console.log("Valor de CREDENTIALS:", Cypress.env('CREDENTIALS'));
         const credentials = JSON.parse(Cypress.env('CREDENTIALS')); 
         
         //finalizar teste , e descrever etapas , (uso do alias, etc)
@@ -79,9 +80,9 @@ describe('Testes referente a funcionalidade de exclusão de reservas via API', (
 
     })
 
-    it('Verificar que api apresenta erro ao tentar deletar uma reserva com id inválido', () => {
+    it.only('Verificar que api apresenta erro ao tentar deletar uma reserva com id inválido', () => {
         //Bug de melhoria, Api deveria retornar talvez um 404 - not found
-        const Authorization = Cypress.env('Authorization');
+        const Authorization = Cypress.env('AUTHORIZATION_TOKEN');
         const bookingId = 7832154;
 
         cy.deleteBooking(bookingId, Authorization).then((response) => {

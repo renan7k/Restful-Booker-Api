@@ -11,6 +11,6 @@ jobs:
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           CYPRESS_AUTHORIZATION_TOKEN: ${{ secrets.AUTHORIZATION_TOKEN }}
-          CYPRESS_CREDENTIALS: ${{ secrets.CREDENTIALS }}
+          CREDENTIALS: ${{ secrets.CREDENTIALS }}
         with:
           command: npm run test:cloud
