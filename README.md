@@ -29,6 +29,12 @@ git clone https://github.com/renan7k/Restful-Booker-Api.git
 npm install
 ```
 
+### Configuração das variáveis de ambiente
+Antes de executar os testes, algumas variáveis de ambiente precisam ser configuradas.  
+
+Faça uma cópia do arquivo 'cypress.env.example.json' e renomeie como 'cypress.env.json' e defina os valores apropriados para todas as variáveis.  
+Observação: o arquivo cypress.env.json não é rastreado pelo git, pois está listado no arquivo .gitignore.  
+
  ### Execução dos testes
 1 - Para execução dos testes no modo iterativo:
 ```bash
